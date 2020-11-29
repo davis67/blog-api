@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.parsers import FileUploadParser
+from rest_framework.response import Response
 from rest_framework import permissions
 from .serializers import PostsSerializer
 from .permissions import IsOwner
@@ -17,7 +18,7 @@ class PostCreateAPIView(CreateAPIView):
 
     parser_class = (ImageUploadParser,)
 
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
         return serializer.save()
