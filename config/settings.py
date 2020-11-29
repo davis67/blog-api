@@ -129,3 +129,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 MEDIA_URL = "/media/"
 
 AUTH_USER_MODEL = "authentication.User"
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.mailtrap.io"
+EMAIL_HOST_USER = os.environ.get("MAILTRAP_USERNAME")
+EMAIL_HOST_PASSWORD = os.environ.get("MAILTRAP_PASSWORD")
+EMAIL_PORT = "587"
+EMAIL_FROM = "davis@sandbox9a4f357c5d214459907dee0b4c0c22f8.mailtrap.org"
