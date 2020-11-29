@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # CUSTOM PROJECTS
+    'rest_framework',
     'authentication.apps.AuthenticationConfig',
     'posts.apps.PostsConfig',
     'core.apps.CoreConfig'
