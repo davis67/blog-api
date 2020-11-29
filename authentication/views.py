@@ -13,11 +13,9 @@ from django.contrib import auth
 from .models import User
 from .utils import Util
 from django.conf import settings
-from drf_yasg.utils import swagger_auto_schema
 from django.http import HttpResponsePermanentRedirect
 from .renderers import UserRenderer
 
-from drf_yasg import openapi
 import os
 
 import jwt
@@ -62,10 +60,10 @@ class RegisterView(GenericAPIView):
 class VerifyEmail(views.APIView):
     serializer_class = EmailVerificationSerializer
 
-    token_param_config = openapi.Parameter(
-        'token', in_=openapi.IN_QUERY, description='Description', type=openapi.TYPE_STRING)
+    # token_param_config = openapi.Parameter(
+    #     'token', in_=openapi.IN_QUERY, description='Description', type=openapi.TYPE_STRING)
 
-    @swagger_auto_schema(manual_parameters=[token_param_config])
+    # @swagger_auto_schema(manual_parameters=[token_param_config])
     def get(self, request):
         token = request.GET.get('token')
         try:
@@ -88,7 +86,6 @@ class LoginAPIView(GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 
 class RequestPasswordResetEmail(GenericAPIView):
@@ -116,7 +113,7 @@ class RequestPasswordResetEmail(GenericAPIView):
                     'email_subject': 'Reset your passsword'}
             Util.send_email(data)
         return Response({'success': 'We have sent you a link to reset your password'}, status=status.HTTP_200_OK)
- 
+
 
 class PasswordTokenCheckAPI(GenericAPIView):
     serializer_class = SetNewPasswordSerializer

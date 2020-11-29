@@ -17,7 +17,7 @@ class PostCreateAPIView(CreateAPIView):
 
     parser_class = (ImageUploadParser,)
 
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
         return serializer.save()
