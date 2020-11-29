@@ -19,9 +19,9 @@ class Comment(core_models.TimeStampedModel):
     """ Comment Model Definition"""
 
     description = models.TextField()
-    author = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    post = models.ForeignKey(
-        "Post", related_name="comments", on_delete=models.CASCADE)
+    # author = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    # post = models.ForeignKey(
+    #     "Post", related_name="comments", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.description
@@ -33,7 +33,7 @@ class Reply(core_models.TimeStampedModel):
     description = models.TextField()
     comment = models.ForeignKey(
         "Comment", related_name="replies", on_delete=models.CASCADE, blank=True, null=True)
-    author = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    # author = models.ForeignKey("users.User", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.description
@@ -45,17 +45,16 @@ class Post(core_models.TimeStampedModel):
     title = models.CharField(max_length=140)
     description = models.TextField()
     photo = models.ImageField(blank=True, upload_to='post_photos/')
-    author = models.ForeignKey(
-        "users.User", related_name="author", on_delete=models.CASCADE)
+    # author = models.ForeignKey(
+    #     "users.User", related_name="author", on_delete=models.CASCADE)
     is_published = models.BooleanField(default=False)
-    authorized_by = models.ForeignKey(
-        "users.User", on_delete=models.SET_NULL, null=True, blank=True, default=None)
-    category = models.ForeignKey(
-        "Category", on_delete=models.CASCADE)
+    # authorized_by = models.ForeignKey(
+    #     "users.User", on_delete=models.SET_NULL, null=True, blank=True, default=None)
+    # category = models.ForeignKey(
+    #     "Category", on_delete=models.CASCADE)
+
+    class Meta:
+        ordering: ['-updated_at']
 
     def __str__(self):
         return self.title
-
-    def latest_post(self):
-        post, = Post.objects.all()[:1]
-        return post
