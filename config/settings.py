@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # CUSTOM PROJECTS
-    'authentication.apps.AuthenticationConfig'
+    'authentication.apps.AuthenticationConfig',
+    'posts.apps.PostsConfig',
+    'core.apps.CoreConfig'
 ]
 
 MIDDLEWARE = [
