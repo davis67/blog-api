@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 django = "*"
 django-dotenv = "*"
+djangorestframework = "*"
+pillow = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

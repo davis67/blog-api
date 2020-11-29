@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,10 +39,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # CUSTOM PROJECTS
+    'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     'authentication.apps.AuthenticationConfig',
     'posts.apps.PostsConfig',
     'core.apps.CoreConfig'
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'NON_FIELD_ERRORS_KEY': 'error',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'authentication.backends.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -123,3 +136,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
+MEDIA_URL = "/media/"
+
+AUTH_USER_MODEL = "authentication.User"
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.mailtrap.io"
+EMAIL_HOST_USER = os.environ.get("MAILTRAP_USERNAME")
+EMAIL_HOST_PASSWORD = os.environ.get("MAILTRAP_PASSWORD")
+EMAIL_PORT = "587"
+EMAIL_FROM = "davis@sandbox9a4f357c5d214459907dee0b4c0c22f8.mailtrap.org"
