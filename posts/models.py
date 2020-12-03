@@ -45,11 +45,11 @@ class Post(core_models.TimeStampedModel):
     title = models.CharField(max_length=140)
     description = models.TextField()
     photo = models.ImageField(blank=True, upload_to='post_photos/')
-    # author = models.ForeignKey(
-    #     "users.User", related_name="author", on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        "authentication.User", related_name="author", on_delete=models.CASCADE)
     is_published = models.BooleanField(default=False)
-    # authorized_by = models.ForeignKey(
-    #     "users.User", on_delete=models.SET_NULL, null=True, blank=True, default=None)
+    authorized_by = models.ForeignKey(
+        "authentication.User", on_delete=models.SET_NULL, null=True, blank=True, default=None)
     # category = models.ForeignKey(
     #     "Category", on_delete=models.CASCADE)
 

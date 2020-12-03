@@ -21,15 +21,17 @@ class PostCreateAPIView(CreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
-        return serializer.save()
+        author = self.request.user
+        print(author)
+        return serializer.save(author=author)
 
 
 class PostListAPIView(ListAPIView):
-    serializer_class = PostsSerializer
     queryset = Post.objects.all()
+    serializer_class = PostsSerializer
 
 
-class PostDetailAPIView(ListAPIView):
+class PostDetailAPIView(RetrieveAPIView):
     serializer_class = PostsSerializer
     queryset = Post.objects.all()
     lookup_field = 'id'
@@ -39,7 +41,7 @@ class PostUpdateAPIView(UpdateAPIView):
     serializer_class = PostsSerializer
     queryset = Post.objects.all()
     lookup_field = 'id'
-    # permission_classes = (permissions.IsAuthenticated, IsOwner,)
+    permission_classes = (permissions.IsAuthenticated, IsOwner,)
 
 
 class PostDestroyAPIView(DestroyAPIView):

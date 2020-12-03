@@ -2,9 +2,17 @@ from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib import auth
 from .models import User
+from posts.models import Post
 from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+
+
+class UserSerializer(serializers.ModelSerializer):
+    # posts = serializers.PrimaryKeyRelatedField(many=True, queryset=Post.objects.all())
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'gender', 'avatar', 'is_superuser', 'is_staff', 'created_at', 'updated_at']
 
 
 class RegisterSerializer(serializers.ModelSerializer):

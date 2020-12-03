@@ -30,6 +30,9 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
+    def all():
+        return User.objects.all()
+
 
 class User(AbstractBaseUser, PermissionsMixin, core_models.TimeStampedModel):
     GENDER_MALE = "male"
