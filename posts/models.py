@@ -15,30 +15,6 @@ class Category(core_models.TimeStampedModel):
         return self.name
 
 
-class Comment(core_models.TimeStampedModel):
-    """ Comment Model Definition"""
-
-    description = models.TextField()
-    # author = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    # post = models.ForeignKey(
-    #     "Post", related_name="comments", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.description
-
-
-class Reply(core_models.TimeStampedModel):
-    """ Reply Model Definition"""
-
-    description = models.TextField()
-    comment = models.ForeignKey(
-        "Comment", related_name="replies", on_delete=models.CASCADE, blank=True, null=True)
-    # author = models.ForeignKey("users.User", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.description
-
-
 class Post(core_models.TimeStampedModel):
     """ Post Model Definition """
 
@@ -58,3 +34,27 @@ class Post(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+
+class Comment(core_models.TimeStampedModel):
+    """ Comment Model Definition"""
+
+    description = models.TextField()
+    author = models.ForeignKey("authentication.User", on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        "Post", related_name="comments", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.description
+
+
+class Reply(core_models.TimeStampedModel):
+    """ Reply Model Definition"""
+
+    description = models.TextField()
+    comment = models.ForeignKey(
+        "Comment", related_name="replies", on_delete=models.CASCADE, blank=True, null=True)
+    author = models.ForeignKey("authentication.User", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.description
