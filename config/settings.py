@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # CUSTOM PROJECTS
     'rest_framework',
     'corsheaders',
+
     'rest_framework_simplejwt.token_blacklist',
     'authentication.apps.AuthenticationConfig',
     'posts.apps.PostsConfig',

@@ -44,6 +44,7 @@ class Comment(core_models.TimeStampedModel):
     post = models.ForeignKey(
         "Post", related_name="comments", on_delete=models.CASCADE)
 
+
     def __str__(self):
         return self.description
 
@@ -58,3 +59,4 @@ class Reply(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.description
+

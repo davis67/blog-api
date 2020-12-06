@@ -2,7 +2,9 @@ from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib import auth
 from .models import User
+
 from posts.models import Post
+
 from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -27,6 +29,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email', 'avatar', 'gender', 'password']
 
+
     def validate(self, attrs):
         email = attrs.get('email', '')
         username = attrs.get('password', '')
@@ -34,6 +37,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         # if not username.isalnum():
         #     raise serializers.ValidationError(
         #         'The username should only contain alphanumeric characters')
+
 
         if User.objects.filter(email=email).exists():
             raise serializers.ValidationError(
@@ -138,3 +142,4 @@ class SetNewPasswordSerializer(serializers.Serializer):
         except Exception as e:
             raise AuthenticationFailed('The reset link is invalid', 401)
         return super().validate(attrs)
+

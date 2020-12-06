@@ -28,6 +28,7 @@ class PostsSerializer(serializers.ModelSerializer):
     author = user_serializers.UserSerializer(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
 
+
     class Meta:
         model = Post
         fields = [
@@ -45,5 +46,6 @@ class PostsSerializer(serializers.ModelSerializer):
         ]
 
         read_only_fields = ["author", 'comments' "authorized_by"]
+
 
 

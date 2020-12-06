@@ -4,6 +4,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.parsers import FileUploadParser
+
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_bytes, smart_str, smart_text, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -27,9 +28,9 @@ class CustomRedirect(HttpResponsePermanentRedirect):
     allowed_schemes = [os.environ.get('APP_SCHEME'), 'http', 'https']
 
 
+
 class ImageUploadParser(FileUploadParser):
     media_type = 'image/*'
-
 
 class RegisterView(GenericAPIView):
     """docstring for RegisterView"""
@@ -48,6 +49,7 @@ class RegisterView(GenericAPIView):
             serializer.save()
             user_data = serializer.data
             user = User.objects.get(email=user_data['email'])
+
             token = RefreshToken.for_user(user).access_token
             current_site = get_current_site(request).domain
             relativeLink = reverse('email-verify')
