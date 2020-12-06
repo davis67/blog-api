@@ -10,6 +10,9 @@ djangorestframework = "*"
 pillow = "*"
 djangorestframework-simplejwt = "*"
 
+django-cors-headers = "*"
+
+
 [dev-packages]
 
 [requires]

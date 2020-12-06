@@ -9,4 +9,6 @@ urlpatterns = [
     path('edit/<int:id>', views.PostUpdateAPIView.as_view(), name="posts.update"),
     path('delete/<int:id>', views.PostDestroyAPIView.as_view(),
          name="posts.destroy"),
+    path("comment/<int:pk>/", views.CommentCreateAPIView.as_view(), name="add-comment")
+
 ]
